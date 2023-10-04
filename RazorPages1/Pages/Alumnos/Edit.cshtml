@@ -1,0 +1,16 @@
+﻿@page
+@model RazorPages1.Pages.Alumnos.EditModel
+@{
+    var photo = "~/images/" + (Model.alumno.Foto ?? "noimage.jpg");
+}
+
+<form method="post" class="mt-3">
+    <input hidden asp-formaction="alumno.Id" />
+    <div class="form-group row">
+        <label asp-formaction="alumno.Nombre" class="form-control" placeholder="Nombre" />
+        <div class="col-sm-10">
+            <span asp-validation-formaction="alumno.Nombre" class="text-danger"></span>
+
+        </div>
+    </div>
+</form>
