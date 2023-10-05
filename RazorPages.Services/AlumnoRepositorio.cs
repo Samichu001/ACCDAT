@@ -20,6 +20,14 @@ namespace RazorPages.Services
                 new Alumno() {Id= 1, Nombre = "Mikel Aramburu", CursoID = Cursos.H1, Email = "david.from@zaragosa.salesianos.edu", Foto = "Mikel.jpg"}
             };
         }
+
+        public Alumno Add(Alumno alumnoNuevo)
+        {
+            alumnoNuevo.Id = listaAlumnos.Max(a => a.Id) + 1;
+            listaAlumnos.Add(alumnoNuevo);
+            return alumnoNuevo;
+        }
+
         public IEnumerable<Alumno> GetAllAlumnos()
         {
             return listaAlumnos;

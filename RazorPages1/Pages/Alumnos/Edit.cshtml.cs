@@ -9,13 +9,31 @@ namespace RazorPages1.Pages.Alumnos
     {
         private readonly IAlumnoRepositorio AlumnoRepositorio;
         public Alumno alumno { get; set; }
-        public EditModel(IAlumnoRepositorio alumnorepositorio)
+        public EditModel(IAlumnoRepositorio alumnorepositorio, IWebHostEnvironment webHostEnvironment)
         {
             this.AlumnoRepositorio = alumnorepositorio;
+            WebHostEnvironment = webHostEnvironment;
         }
-        public void OnGet(int id)
+        public void OnGet(int? id)
         {
-            alumno = AlumnoRepositorio.GetAlumno(id);
+            if (id.HasValue)  //misma sintaxis que (id == null) da un booleano si es cierto o no
+            {
+                alumno = AlumnoRepositorio.GetAlumno(id.Value);
+            }
+            else
+            {
+                alumno = new Alumno();
+            }
+        }
+        public IActionResult OnPost(Alumno alumno)
+        {
+            if(Photo != null)
+            {
+                if(alumno.Photo != null)
+                {
+
+                }
+            }
         }
     }
 }
