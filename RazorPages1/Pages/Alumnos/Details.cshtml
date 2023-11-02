@@ -4,7 +4,9 @@
     var photo = "~/images/" + (Model.alumno.Foto ?? "noimage.jpg");
 }
 
-
+<div class="sol-sm-8">
+    @await Component.InvokeAsync("AlumnoCurso", new{curso = Model.alumno.CursoID})
+</div>
 
 
 <div class="row justify-content-center m-3">

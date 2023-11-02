@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RazorPages.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IAlumnoRepositorio, AlumnoRepositorio>();
+
+IConfiguration configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
+    .Build();
+
+builder.Services.AddDbContextPool<ColegioDBContext>(options => options.UseSqlServer(configuration.GetConnectionString("ColegioDBConnection")));
 
 var app = builder.Build();
 

@@ -9,6 +9,7 @@ namespace RazorPages1.Pages.Alumnos
     {
         private readonly IAlumnoRepositorio AlumnoRepositorio;
         public Alumno alumno { get; set; }
+
         public EditModel(IAlumnoRepositorio alumnorepositorio, IWebHostEnvironment webHostEnvironment)
         {
             this.AlumnoRepositorio = alumnorepositorio;

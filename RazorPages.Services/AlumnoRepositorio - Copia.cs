@@ -28,6 +28,35 @@ namespace RazorPages.Services
             return alumnoNuevo;
         }
 
+        public IEnumerable<CursoCuantos> AlumnosPorCurso(Curso? curso)
+        {
+            IEnumerable<Alumno> consulta = listaAlumnos;
+            if(curso.HasValue)
+            {
+                consulta.Where(a => a.CursoID == curso);
+            }
+            return listaAlumnos.GroupBy(a => a.CursoID)
+                .Select(g => new CursoCuantos()
+                {
+                    Clase = g.Key.Value,
+                    NumAlumnos = g.Count()
+                }).ToList();
+        }
+
+        public IEnumerable<Alumno> Busqueda(String elementoABuscar)
+        {
+            if(string.IsNullOrEmpty(elementoABuscar))
+            {
+                return listaAlumnos;
+            }
+            return listaAlumnos.Where(a => a.Nombre.Contains(elementoABuscar) || a.Email.Contains(elementoABuscar));
+        }
+
+        public Alumno Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Alumno> GetAllAlumnos()
         {
             return listaAlumnos;

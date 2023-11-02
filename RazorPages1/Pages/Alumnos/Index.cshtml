@@ -3,7 +3,17 @@
 @{
 }
 <h1>Alumnos</h1>
-<h3>@Model.Alumnos.Count()</h3>
+<form method="get">
+    <div class="input-group">
+        <input class="form-control" asp-for="elementoABuscar" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primaty">Buscar</button>
+        </div>
+    </div>
+</form>
+<div class="col-sm-8">
+    @await Component.InvokeAsync("AlumnosCursoContar")
+</div>
 <div class="card-deck">
     @foreach(var alumno in Model.Alumnos)
     {
@@ -18,7 +28,7 @@
             <div class="card-footer text-center">
                 <a asp-page="/Alumnos/Details" asp-route-ID= "@alumno.Id" class="btn btn-primary m-1">View</a>
                 <a asp-page="/Alumnos/Edit" asp-route-ID="@alumno.Id" class="btn btn-primary m-1">Edit</a>
-                <a asp-page="#" class="btn btn-danger m-1">Delete</a>
+                <a asp-page="/Alumnos/Delete" asp-route-ID="@alumno.Id" class="btn btn-danger m-1">Delete</a>
             </div>
         </div>
     }
