@@ -1,8 +1,11 @@
-﻿using System;
+﻿using RazorPages.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 namespace RazorPages.Services
 {
@@ -17,8 +20,12 @@ namespace RazorPages.Services
 
         public Alumno Add(Alumno alumnoNuevo)
         {
-            alumnoNuevo.Id = listaAlumnos.Max(a => a.Id) + 1;
-            listaAlumnos.Add(alumnoNuevo);
+            context.Database.ExecuteSqlRaw("insertarAlumno {0} {1} {2} {3}",
+                alumnoNuevo.Nombre,
+                alumnoNuevo.Email,
+                alumnoNuevo.Foto,
+                alumnoNuevo.CursoID);
+
             return alumnoNuevo;
         }
 
@@ -58,7 +65,10 @@ namespace RazorPages.Services
 
         public Alumno GetAlumno(int id)
         {
-            return listaAlumnos.FirstOrDefault(a => a.Id == id);
+            SqlParameter parametro = new SqlParameter("@Id", id);
+            return context.Alumnos.FromSqlRaw<Alumno>("GetAlumnoById @Id", parametro)
+                .ToList()
+                .FirstOrDefault()
         }
 
         public void Update(Alumno alumnoActualizado)

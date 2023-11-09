@@ -26,7 +26,7 @@ namespace RazorPages1.Pages.Alumnos
                 alumno = new Alumno();
             }
         }
-        public IActionResult OnPost(Alumno alumno)
+        public IActionResult OnGet(int? id)
         {
             if(Photo != null)
             {

@@ -5,9 +5,9 @@
     var titulo = Model.alumno.Id > 0 ? "Editar" : "Crear";
 }
 <h1 align="center">@titulo alumno</h1>
-<form method="post" class="mt-3">
-    <input type="hidden" asp-formaction="alumno.Id" />
-    <input type="hidden" asp-formaction="alumno.Photo" />
+<form method="post" class="mt-3" enctype="multipart/form-data">
+    <input type="hidden" asp-for="alumno.Id" />
+    <input id="lafoto" type="hidden" asp-for="alumno.Foto" />
     <div class="form-group row">
         <label asp-for="alumno.Nombre" class="col-sm-2 col-form-label"></label>/>
         <div class="col-sm-10">
@@ -34,8 +34,15 @@
     </div>
 
     <div class="form-froup row">
-        <div class="col-sm-10">
+        <div class="col-sm-10"
             <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-page="/Alumnos/Index" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+    <div class="form-froup row">
+        <div class="col-sm-10">
+            <button type="submit" value="alumno.Foto" onchange="lafoto.value=this.value.substring(this.value.lastIndexOf('\\')+1)" />
             <a asp-page="/Alumnos/Index" class="btn btn-primary">Cancel</a>
         </div>
     </div>
